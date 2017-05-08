@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" charset="UTF-8"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Title</title>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8"/>
+    <meta name="viewpoint" content="width = device-width, initialscale = 1, maximumscale=1.0 ,user-scalable=no"/>
+    <link href="webjars/materializecss/0.97.7/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen"/>
+
+</head>
+<body>
+
+<ul id="lang-dropdown" class="dropdown-content">
+    <li><a href="?lang=pl">Polski</a></li>
+    <li><a href="?lang=en">Angielski</a></li>
+</ul>
+<nav>
+    <div class="nav-wrapper indigo">
+        <ul class="right">
+            <li>
+                <a class="select-dropdown" href="#!" data-activates="lang-dropdown">
+                    <i class="mdi-action-language right"></i> Jezyk
+                </a>
+            </li>
+            <li><a href="?lang=pl">Polski</a></li>
+            <li><a href="?lang=en">Angielski</a></li>
+        </ul>
+    </div>
+</nav>
+<div>
+    zalogowany jako: <b sec:authentiication="name"/> z rolami <span sec:authentication="authorities"/>
+    <form th:action="@{/logout}" method="post" style="display: inline-block">
+        <input type="submit" value="wyloguj"/>
+    </form>
+    <hr/>
+</div>
+<a data-activates="lang-dropdown" class="dropdown-content">ddddd</a>
+
+<section layout:fragment="content">
+    <p>Zawartosc strony</p>
+</section>
+
+<script src="webjars/materialize/0.97.8/bin/materialize.js"></script>
+<script src="webjars/jquery/3.1.1/src/jquery.js"></script>
+<script src="webjars/materialize/0.97.8/bin/materialize.css"></script>
+<script type="text/javascript">
+    ${".select-dropdown"}.u(12);
+</script>
+<script type="text/javascript" layout:fragment="script"></script>
+</body>
+</html>

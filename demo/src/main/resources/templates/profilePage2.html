@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" charset="UTF-8"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head lang="pl">
+    <title>Profile</title>
+    <link href="webjars/materialize/0.97.8/bin/materialize.css"
+          type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<div class="row" layout:fragment="content">
+    <h2 class="indigo-text center" th:text="#{profile.tilte}">Informacje Osobiste</h2>
+    <form th:action="@{/profile}" th:object="${profileFormDTO}" method="post" class="col m8 s12 offset-m2">
+        <!--<ul th:if="${#fields.hasErrors('*')}" class="picker__list-item">
+            <li th:each=" err : ${#fields.errors('*')}" th:text="${err}"> Bledne Dane</li>
+        </ul>-->
+
+        <div class="row">
+            <div class="input-field col s6 black-text">
+                <input th:filed="${profileFormDTO.twitterHandle}" id="twitterHandle" type="text"
+                       required="required" th:onerror="invalid" placeholder="id tweeter"/>
+
+            </div>
+            <div class="input-field col s6">
+                <input th:filed="${profileFormDTO.email}" id="email" type="email"
+                       required="required" th:onerror="invalid" placeholder="adres email"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input th:filed="${profileFormDTO.birthDate}" id="birthDate" type="text"
+                       th:placeholder="${dateFormat}" required="required" th:onerror="invalid"/>
+
+            </div>
+        </div>
+
+        <fieldset class="row">
+            <legend>Co lubisz?</legend>
+            <button class=" btn-large" type="submit" name="addTaste" th:text="#{add.taste}">
+                Dodaj preferencje
+                <i class="material-icons"></i>
+            </button>
+            <div th:error="*{tastes}" class="red-text">Blad</div> dupa
+            <div class="row" th:each="row,rowStat : ${tastes}"><!-- TAK MA BYC *{tastes} -->
+                <div class="col s6">
+                    <input type="text" th:field="*{tastes[__${rowStat.index}__]}"
+                    th:placeholder="#{tastes.placeholder}"/>
+                </div>
+
+                <div class="col s6">
+                    <button class="btn-large" type="submit" name="removeTaste" th:value="${rowStat.index}"
+                            th:text="#{remove}"> Usun
+
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row s12">
+            <button class="btn waves-effect waves-light" type="submit" name="save">Wyślij
+                <i class="mdi-contend-send-right"></i>
+            </button>
+        </div>
+        <!--<ul th:if="${#fields.hasErrors('*')}" class="picker__list-item">
+            <li th:each=" err : ${#fields.detailedErrors()}" th:text="${err}" class="red-text"> Bledne Dane</li>
+        </ul>-->
+    </form>
+
+</div>
+
+<script layout:fragment="script">
+    $('button').bind('click',function(e){
+        if(e.currentTarget.name === 'save'){
+            $(e.currentTarget.form).removeAttr('noValidate');
+        }else{
+            $(e.currentTarget.form).attr('noValidate','noValidate');
+        }
+    });
+</script>
+</body>
+</html>

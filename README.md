@@ -1,1 +1,1 @@
-Palikacja pobierająca dene z ApiTwitter
+Aplikacja pobierająca dene z ApiTwitter

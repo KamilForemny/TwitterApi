@@ -1,1 +1,1 @@
-Aplikacja pobierająca dene z ApiTwitter
+Sample app getting Twitter user info.

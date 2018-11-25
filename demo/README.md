@@ -1,1 +1,1 @@
-Palikacja pobierająca dene z ApiTwitter
+Sample app getting user info form Twitter API
